@@ -13,7 +13,7 @@ import { useAuth } from '@/hooks/useAuth';
 
 const AuthPage = () => {
   const navigate = useNavigate();
-  const { login, signup, isAuthenticated, user } = useAuth();
+  const { login, signup, isAuthenticated, user, loading: authLoading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   
   // Login form
@@ -30,12 +30,15 @@ const AuthPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // Wait for auth loading to complete before redirecting
+    if (authLoading) return;
+    
     if (isAuthenticated && user?.onboardingComplete) {
       navigate('/dashboard');
     } else if (isAuthenticated && !user?.onboardingComplete) {
       navigate('/onboarding');
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, user, navigate, authLoading]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
