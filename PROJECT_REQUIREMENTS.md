@@ -30,35 +30,51 @@ SoulSync 2.0 is a **mental health AI companion desktop application** designed to
   - Window state persistence
   - Desktop-specific UI patterns
 
-### 2. **AI Model: Fine-tuned BERT (No External LLM)** ✅
+### 2. **AI Model: Fine-tuned BERT (No External LLM)** ⏳
 - **No OpenAI, Claude, or Gemini needed**
 - **Model:** Custom fine-tuned BERT model
 - **Training Data:** 50,000+ mental health conversation samples
-- **Deployment:** User has/will provide model access details
+- **Status:** DEFERRED - Will integrate later
+- **Current:** Use placeholder responses for now
 - **Integration Approach:** 
-  - Model likely hosted as API endpoint or local model
-  - Need to ask user for:
-    - Model API endpoint URL (if hosted)
-    - OR local model files location (if running locally)
-    - Authentication method (API key, token, etc.)
-    - Request/response format
+  - User will provide details when ready to integrate
+  - For now, focus on UI/UX and local data storage
 
-### 3. **Emergency Alerts: Telegram Bot** ✅
-- **User has Telegram Bot Token** - will provide when ready
+### 3. **Emergency Alerts: Telegram Bot** ✅ CLARIFIED
+- **SoulSync Bot Already Exists** - Central bot managed by team
+- **No Bot Token Needed from Users** - Users only enter Chat ID
 - **Purpose:** Send emergency alerts to user's emergency contact
-- **Trigger:** Crisis detection from BERT model or manual SOS button
-- **Implementation:**
-  - Python: `python-telegram-bot` library
-  - Backend endpoint: `/api/emergency-alert`
-  - Store user's emergency contact Telegram Chat ID in MongoDB
-  - Send immediate alert when crisis detected
+- **User Flow:**
+  - During signup/onboarding, user enters emergency contact's Telegram Chat ID
+  - User gets Chat ID from their emergency contact (mom, friend, etc.)
+  - When crisis detected OR SOS button pressed, alert sent to that Chat ID
+- **Implementation:** (Details needed from team)
+  - SoulSync bot API endpoint (to be provided)
+  - Authentication method for bot API
+  - Request format to trigger alert
+- **Storage:** Emergency contact Chat ID stored in local JSON file (users.json)
 
-### 4. **Development Priority: Electron First** ✅
-- **Phase 1:** Convert to Electron desktop app (CURRENT FOCUS)
-- **Phase 2:** Integrate fine-tuned BERT model
-- **Phase 3:** Implement Telegram emergency alerts
-- **Phase 4:** Complete MongoDB integration
-- **Phase 5:** Testing and polish
+### 4. **Development Priority: Updated** ✅
+- **Phase 1:** Test Electron desktop app (CURRENT FOCUS)
+- **Phase 2:** Implement SOS button UI
+- **Phase 3:** Refactor to local JSON storage (NO MongoDB)
+- **Phase 4:** Integrate BERT model (LATER - when user provides details)
+- **Phase 5:** Connect Telegram alerts (LATER - need bot API details)
+- **Phase 6:** Testing and polish
+
+### 5. **Data Storage: Local JSON Files** ✅ NEW REQUIREMENT
+- **NO MongoDB** - All data stored locally
+- **Storage Location:** User's app data directory
+  - Windows: `%APPDATA%/soulsync/`
+  - macOS: `~/Library/Application Support/soulsync/`
+  - Linux: `~/.config/soulsync/`
+- **Files:**
+  - `users.json` - User accounts and settings
+  - `conversations.json` - Chat history
+  - `mood_history.json` - Mood tracking data
+  - `settings.json` - App preferences
+- **Implementation:** Electron main process handles file I/O via IPC
+- **Backup:** Consider auto-backup feature later
 
 ---
 
