@@ -88,7 +88,7 @@ const AuthPage = () => {
         description: 'Let\'s complete your wellness profile.',
       });
       setLoading(false);
-      navigate('/onboarding');
+      // Navigation handled by useEffect based on onboardingComplete status
     }, 1000);
   };
 
