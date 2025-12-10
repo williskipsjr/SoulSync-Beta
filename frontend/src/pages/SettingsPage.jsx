@@ -20,13 +20,26 @@ const SettingsPage = () => {
   const { theme, setTheme } = useTheme();
   const { user, updateUser, logout } = useAuth();
   
-  const [telegramChatId, setTelegramChatId] = useState(user?.telegramChatId || '');
+  const [contactName, setContactName] = useState(user?.emergencyContact?.name || '');
+  const [contactRelationship, setContactRelationship] = useState(user?.emergencyContact?.relationship || '');
+  const [telegramChatId, setTelegramChatId] = useState(user?.emergencyContact?.telegramChatId || '');
   const [notifications, setNotifications] = useState(true);
   const [moodReminders, setMoodReminders] = useState(true);
   const [crisisAlerts, setCrisisAlerts] = useState(true);
 
   const handleSaveTelegramId = () => {
-    updateUser({ telegramChatId });
+    if (!telegramChatId.trim()) {
+      toast.error('Please enter a Telegram Chat ID');
+      return;
+    }
+
+    const emergencyContact = {
+      name: contactName || 'Emergency Contact',
+      relationship: contactRelationship || 'Not specified',
+      telegramChatId: telegramChatId.trim()
+    };
+
+    updateUser({ emergencyContact });
     toast.success('Emergency contact updated', {
       description: 'Your emergency contact has been saved.',
     });
@@ -161,21 +174,43 @@ const SettingsPage = () => {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="telegram-id">Telegram Chat ID</Label>
-                  <div className="flex gap-2">
-                    <Textarea
-                      id="telegram-id"
-                      value={telegramChatId}
-                      onChange={(e) => setTelegramChatId(e.target.value)}
-                      placeholder="Enter Chat ID..."
-                      rows={2}
-                      className="resize-none flex-1"
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-name">Contact Name</Label>
+                    <Input
+                      id="contact-name"
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      placeholder="e.g., Mom, Best Friend..."
                     />
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    Current: {user?.telegramChatId || 'Not set'}
-                  </p>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-relationship">Relationship</Label>
+                    <Input
+                      id="contact-relationship"
+                      value={contactRelationship}
+                      onChange={(e) => setContactRelationship(e.target.value)}
+                      placeholder="e.g., Mother, Friend..."
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="telegram-id">Telegram Chat ID</Label>
+                    <div className="flex gap-2">
+                      <Textarea
+                        id="telegram-id"
+                        value={telegramChatId}
+                        onChange={(e) => setTelegramChatId(e.target.value)}
+                        placeholder="Enter Chat ID..."
+                        rows={2}
+                        className="resize-none flex-1"
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Current: {user?.emergencyContact?.telegramChatId ? `${user.emergencyContact.name} (${user.emergencyContact.telegramChatId})` : 'Not set'}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex gap-2">
