@@ -69,6 +69,12 @@ export const useConversations = () => {
     });
 
     saveConversations(updated);
+    
+    // Update currentConversation immediately to show user message
+    const updatedConv = updated.find(conv => conv.id === conversationId);
+    if (updatedConv && currentConversation?.id === conversationId) {
+      setCurrentConversation(updatedConv);
+    }
 
     // If user message, get AI response
     if (role === 'user') {
@@ -102,6 +108,13 @@ export const useConversations = () => {
           });
 
           saveConversations(withAI);
+          
+          // Update currentConversation to show AI response
+          const updatedWithAI = withAI.find(conv => conv.id === conversationId);
+          if (updatedWithAI && currentConversation?.id === conversationId) {
+            setCurrentConversation(updatedWithAI);
+          }
+          
           return aiMessage;
         }
       } catch (error) {
@@ -126,6 +139,13 @@ export const useConversations = () => {
         });
         
         saveConversations(withFallback);
+        
+        // Update currentConversation to show fallback response
+        const updatedWithFallback = withFallback.find(conv => conv.id === conversationId);
+        if (updatedWithFallback && currentConversation?.id === conversationId) {
+          setCurrentConversation(updatedWithFallback);
+        }
+        
         return fallbackMessage;
       }
     }
