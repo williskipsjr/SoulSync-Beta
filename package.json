@@ -1,0 +1,67 @@
+{
+  "name": "soulsync-desktop",
+  "version": "2.0.0",
+  "description": "SoulSync 2.0 - Mental Health AI Desktop Companion",
+  "main": "electron/main.js",
+  "author": "SoulSync Team",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "postinstall": "cd frontend && yarn install && cd ../backend && pip install -r requirements.txt",
+    "electron:dev": "concurrently \"yarn electron:start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron:start": "cd frontend && BROWSER=none yarn start",
+    "electron:build": "cd frontend && yarn build && electron-builder",
+    "electron:build:win": "cd frontend && yarn build && electron-builder --windows",
+    "electron:build:mac": "cd frontend && yarn build && electron-builder --mac",
+    "electron:build:linux": "cd frontend && yarn build && electron-builder --linux",
+    "start": "electron .",
+    "backend:start": "cd backend && uvicorn server:app --host 0.0.0.0 --port 8001",
+    "dev": "concurrently \"yarn backend:start\" \"yarn electron:dev\""
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-store": "^8.1.0"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "concurrently": "^8.2.2",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.soulsync.desktop",
+    "productName": "SoulSync",
+    "directories": {
+      "output": "dist",
+      "buildResources": "electron/resources"
+    },
+    "files": [
+      "electron/**/*",
+      "frontend/build/**/*",
+      "backend/**/*",
+      "!backend/__pycache__",
+      "!backend/.env",
+      "!backend/venv"
+    ],
+    "win": {
+      "target": ["nsis"],
+      "icon": "electron/icon.png"
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": "electron/icon.png",
+      "category": "public.app-category.healthcare-fitness"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "electron/icon.png",
+      "category": "Education"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
