@@ -108,6 +108,20 @@ const SettingsPage = () => {
     navigate('/auth');
   };
 
+  // Show loading screen while checking auth state
+  if (authLoading) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-calm">
+        <div className="text-center">
+          <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-elegant mx-auto mb-4 animate-pulse">
+            <Settings className="w-7 h-7 text-primary-foreground" />
+          </div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <AppShell>
       <div className="flex-1 overflow-y-auto custom-scrollbar p-6">
