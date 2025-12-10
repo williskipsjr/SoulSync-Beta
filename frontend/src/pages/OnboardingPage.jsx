@@ -12,7 +12,9 @@ const OnboardingPage = () => {
   const navigate = useNavigate();
   const { user, updateUser } = useAuth();
   const [step, setStep] = useState(1);
-  const [telegramChatId, setTelegramChatId] = useState(user?.telegramChatId || '');
+  const [emergencyContactName, setEmergencyContactName] = useState(user?.emergencyContact?.name || '');
+  const [emergencyContactRelationship, setEmergencyContactRelationship] = useState(user?.emergencyContact?.relationship || '');
+  const [telegramChatId, setTelegramChatId] = useState(user?.emergencyContact?.telegramChatId || '');
   const [skipEmergency, setSkipEmergency] = useState(false);
 
   const handleContinue = () => {
@@ -26,8 +28,14 @@ const OnboardingPage = () => {
       setStep(2);
     } else if (step === 2) {
       // Complete onboarding
+      const emergencyContact = telegramChatId.trim() ? {
+        name: emergencyContactName || 'Emergency Contact',
+        relationship: emergencyContactRelationship || 'Not specified',
+        telegramChatId: telegramChatId
+      } : null;
+
       updateUser({ 
-        telegramChatId,
+        emergencyContact,
         onboardingComplete: true 
       });
       toast.success('Welcome to SoulSync! 🌿', {
@@ -123,21 +131,45 @@ const OnboardingPage = () => {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium flex items-center gap-2">
-                    <Heart className="w-4 h-4 text-primary" />
-                    Emergency Contact's Telegram Chat ID
-                  </label>
-                  <Textarea
-                    placeholder="Enter their Telegram Chat ID..."
-                    value={telegramChatId}
-                    onChange={(e) => setTelegramChatId(e.target.value)}
-                    rows={3}
-                    className="resize-none transition-smooth"
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    Ask your emergency contact to message your Telegram bot to get their Chat ID.
-                  </p>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Contact Name</label>
+                    <input
+                      type="text"
+                      placeholder="e.g., Mom, Best Friend, Partner..."
+                      value={emergencyContactName}
+                      onChange={(e) => setEmergencyContactName(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-input bg-background"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Relationship</label>
+                    <input
+                      type="text"
+                      placeholder="e.g., Mother, Friend, Spouse..."
+                      value={emergencyContactRelationship}
+                      onChange={(e) => setEmergencyContactRelationship(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-input bg-background"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium flex items-center gap-2">
+                      <Heart className="w-4 h-4 text-primary" />
+                      Telegram Chat ID
+                    </label>
+                    <Textarea
+                      placeholder="Enter their Telegram Chat ID..."
+                      value={telegramChatId}
+                      onChange={(e) => setTelegramChatId(e.target.value)}
+                      rows={2}
+                      className="resize-none transition-smooth"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Ask your emergency contact to message @SoulSyncBot on Telegram to get their Chat ID.
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex gap-3">
