@@ -34,7 +34,7 @@ const WELLNESS_TIPS = [
 
 const MoodDashboard = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
   const { moodHistory, saveMood, getMoodTrend, getAverageMood } = useMood();
   
   const [moodLevel, setMoodLevel] = useState([5]);
@@ -44,10 +44,13 @@ const MoodDashboard = () => {
   const [currentTip, setCurrentTip] = useState(0);
 
   useEffect(() => {
+    // Wait for auth loading to complete before redirecting
+    if (authLoading) return;
+    
     if (!isAuthenticated) {
       navigate('/auth');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, authLoading]);
 
   useEffect(() => {
     // Auto-rotate wellness tips
