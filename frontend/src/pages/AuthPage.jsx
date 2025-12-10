@@ -95,6 +95,20 @@ const AuthPage = () => {
     }, 1000);
   };
 
+  // Show loading screen while checking auth state
+  if (authLoading) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-calm">
+        <div className="text-center">
+          <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-elegant mx-auto mb-4 animate-pulse">
+            <Leaf className="w-7 h-7 text-primary-foreground" />
+          </div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-calm p-4">
       {/* Floating elements */}
