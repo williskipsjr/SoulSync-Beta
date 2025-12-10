@@ -145,37 +145,65 @@ SoulSync 2.0 is a **mental health AI companion desktop application** designed to
 
 ## 📝 PENDING INFORMATION FROM USER
 
-### 1. Fine-tuned BERT Model Access
-**Need to know:**
-- [ ] How is the model deployed?
-  - Hosted API endpoint (URL + auth)?
-  - Local model files (path to model)?
-  - Docker container?
-  - Cloud service (AWS, GCP, Azure)?
-- [ ] Request format example
-- [ ] Response format example
-- [ ] Authentication method (if any)
-- [ ] Rate limits or usage constraints
+### 1. Fine-tuned BERT Model Access ✅ CONFIRMED
+**User Response:** Local model file on user's device
 
-**Example Questions to Ask:**
+**Implementation Plan:**
+- [x] Model Type: Local BERT model files
+- [ ] Model will be loaded in backend Python
+- [ ] Need to install: `transformers`, `torch`, `tensorflow` (depending on model format)
+- [ ] Backend endpoint will load model at startup
+- [ ] Model files path: User will provide to next agent (or place in `/app/backend/models/`)
+- [ ] Expected format: `.h5`, `.pt`, or HuggingFace format
+
+**Architecture:**
+```python
+# Backend will use:
+from transformers import BertTokenizer, BertForSequenceClassification
+# or TensorFlow/Keras if model is .h5 format
+
+# Load model at startup
+model = load_model("path/to/bert-model")
+tokenizer = load_tokenizer("path/to/tokenizer")
+
+# Chat endpoint uses model for inference
+@api_router.post("/chat")
+async def chat(message: str):
+    # Tokenize input
+    inputs = tokenizer(message, return_tensors="pt")
+    # Get model response
+    outputs = model.generate(inputs)
+    response = decode(outputs)
+    # Detect crisis from model output or separate classifier
+    crisis = detect_crisis(response, message)
+    return {"response": response, "crisis_detected": crisis}
 ```
-For your fine-tuned BERT model, please provide:
-1. Model endpoint URL or deployment method
-2. Example request format (JSON structure)
-3. Example response format
-4. Any API keys or authentication needed
-5. Expected response time (latency)
+
+**TODO for Next Agent:**
+- Ask user for exact model file path or have user place model in `/app/backend/models/`
+- Determine model format (PyTorch `.pt`, TensorFlow `.h5`, HuggingFace)
+- Install required dependencies (`transformers`, `torch`, or `tensorflow`)
+- Implement model loading and inference in backend
+
+### 2. Telegram Bot Token ⏳ PENDING
+**User Response:** Will provide to next agent
+
+**Status:**
+- [ ] Bot Token placeholder added to backend `.env`
+- [ ] Implementation ready, waiting for token
+- [ ] Once token provided, emergency alerts will work immediately
+
+**Current Setup:**
+```bash
+# backend/.env (placeholder added)
+TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN_HERE
 ```
 
-### 2. Telegram Bot Token
-**Need:**
-- [ ] Bot Token (format: `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`)
-- [ ] Bot username (optional, for user instructions)
-
-**Will be used for:**
-- Sending emergency alerts to user's emergency contact
-- Backend will use `python-telegram-bot` library
-- Stored securely in backend `.env` file
+**Instructions for Next Agent:**
+1. Ask user for Telegram Bot Token
+2. Update `TELEGRAM_BOT_TOKEN` in `/app/backend/.env`
+3. Test sending alert: `POST /api/emergency-alert`
+4. Verify message received in Telegram
 
 ---
 
