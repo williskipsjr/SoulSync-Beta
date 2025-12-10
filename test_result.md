@@ -245,6 +245,12 @@ frontend:
       - working: true
         agent: "main"
         comment: "Chat UI complete with empty state, glowing orb, quick prompts, message bubbles. Calls backend /api/chat endpoint. Crisis banner shows on detection."
+      - working: false
+        agent: "user"
+        comment: "USER REPORTED: When sending messages, they don't appear immediately in the chat interface. Bot responses also not visible until navigating away and coming back."
+      - working: true
+        agent: "main"
+        comment: "FIXED: Updated useConversations hook to immediately update currentConversation state when messages are added. Now user messages and AI responses appear instantly without requiring navigation. The typing indicator (three dots animation) was already implemented and working."
   
   - task: "Settings page with emergency contact management"
     implemented: true
