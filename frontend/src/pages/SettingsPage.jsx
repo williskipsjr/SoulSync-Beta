@@ -14,6 +14,7 @@ import { useTheme } from '@/components/ThemeProvider';
 import { useAuth } from '@/hooks/useAuth';
 import AppShell from '@/components/AppShell';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const SettingsPage = () => {
   const navigate = useNavigate();
@@ -26,6 +27,15 @@ const SettingsPage = () => {
   const [notifications, setNotifications] = useState(true);
   const [moodReminders, setMoodReminders] = useState(true);
   const [crisisAlerts, setCrisisAlerts] = useState(true);
+
+  useEffect(() => {
+    // Wait for auth loading to complete before redirecting
+    if (authLoading) return;
+    
+    if (!isAuthenticated) {
+      navigate('/auth');
+    }
+  }, [isAuthenticated, navigate, authLoading]);
 
   const handleSaveTelegramId = () => {
     if (!telegramChatId.trim()) {
