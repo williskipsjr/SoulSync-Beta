@@ -30,10 +30,12 @@ const AuthPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && user?.onboardingComplete) {
       navigate('/dashboard');
+    } else if (isAuthenticated && !user?.onboardingComplete) {
+      navigate('/onboarding');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, user, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
