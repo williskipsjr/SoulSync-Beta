@@ -397,3 +397,45 @@ agent_communication:
       3. Get SoulSync Telegram bot API details
       4. Add BERT model when user provides details
       5. Test all features end-to-end
+  
+  - agent: "main"
+    message: |
+      🔧 CHAT VISIBILITY BUG FIX COMPLETED
+      
+      ISSUE REPORTED BY USER:
+      - User messages not visible immediately after sending
+      - Bot responses not visible until navigating away and back
+      - Messages only appeared after clicking "new chat" then returning to recent chats
+      
+      ROOT CAUSE IDENTIFIED:
+      - In useConversations hook, the `addMessage` function was:
+        ✓ Saving messages to localStorage correctly
+        ✓ Updating the conversations array
+        ✗ NOT updating the currentConversation state
+      - ChatPage displays messages from currentConversation.messages
+      - Since currentConversation wasn't being updated, UI didn't re-render
+      - Only when navigating away/back did the conversation reload from storage
+      
+      ✅ FIX IMPLEMENTED:
+      File: /app/frontend/src/hooks/useConversations.js
+      
+      Changes:
+      1. After adding user message: Update currentConversation state immediately
+      2. After receiving AI response: Update currentConversation state again
+      3. On fallback response (error case): Update currentConversation state
+      
+      This ensures the UI re-renders immediately when:
+      - User sends a message → message appears instantly
+      - Bot responds → response appears instantly
+      
+      ADDITIONAL FEATURES (ALREADY WORKING):
+      - Three dots typing indicator animation ✅ (lines 221-250 in ChatPage.jsx)
+      - Smooth scroll to bottom on new messages ✅
+      - Crisis banner detection and display ✅
+      
+      SERVICES STATUS:
+      - Frontend: Running ✅ (compiled successfully)
+      - Backend: Running ✅
+      - MongoDB: Running ✅
+      
+      READY FOR USER TESTING
