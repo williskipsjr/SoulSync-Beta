@@ -13,7 +13,7 @@ import { useAuth } from '@/hooks/useAuth';
 
 const AuthPage = () => {
   const navigate = useNavigate();
-  const { login, signup, isAuthenticated } = useAuth();
+  const { login, signup, isAuthenticated, user } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   
   // Login form
