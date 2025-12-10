@@ -233,7 +233,7 @@ const AuthPage = () => {
                       type="password"
                       placeholder="••••••••"
                       value={signupPassword}
-                      onChange={(e) => setSignupPassword(e.target.value)>
+                      onChange={(e) => setSignupPassword(e.target.value)}
                       required
                       className="transition-smooth"
                     />
