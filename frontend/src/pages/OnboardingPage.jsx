@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Leaf, Heart, Shield, ArrowRight, CheckCircle2 } from 'lucide-react';
@@ -11,12 +11,24 @@ import { useAuth } from '@/hooks/useAuth';
 
 const OnboardingPage = () => {
   const navigate = useNavigate();
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, isAuthenticated, loading: authLoading } = useAuth();
   const [step, setStep] = useState(1);
   const [emergencyContactName, setEmergencyContactName] = useState(user?.emergencyContact?.name || '');
   const [emergencyContactRelationship, setEmergencyContactRelationship] = useState(user?.emergencyContact?.relationship || '');
   const [telegramChatId, setTelegramChatId] = useState(user?.emergencyContact?.telegramChatId || '');
   const [skipEmergency, setSkipEmergency] = useState(false);
+
+  useEffect(() => {
+    // Wait for auth loading to complete before redirecting
+    if (authLoading) return;
+    
+    if (!isAuthenticated) {
+      navigate('/auth');
+    } else if (user?.onboardingComplete) {
+      // If onboarding is already complete, redirect to dashboard
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, user, navigate, authLoading]);
 
   const handleContinue = () => {
     if (step === 1) {
