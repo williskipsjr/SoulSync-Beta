@@ -49,6 +49,62 @@ A compassionate desktop application that provides 24/7 mental health support thr
 - 🚨 **Crisis Detection**: Automatic emergency contact notification
 - 💚 **Calming Design**: Wellness-focused green theme designed for comfort
 
+## 📸 Application Screenshots
+
+### Authentication & Onboarding
+
+**Login Page**
+- Clean, calming green gradient design with wellness-focused aesthetics
+- Secure login with email and password
+- Tab-based interface for Login and Sign Up
+
+**Onboarding Flow (Step 1)**
+- Emergency contact setup with Telegram Chat ID integration
+- Contact name and relationship fields for personalized emergency alerts
+- Clear explanation of why emergency contacts are needed for user safety
+- Option to skip if needed (with warning message)
+
+**Onboarding Flow (Step 2)**
+- Welcome screen introducing SoulSync features
+- Overview of Emotional Support, Crisis Detection, and Mood Tracking
+- "Get Started" button to complete onboarding and access the dashboard
+
+### Dashboard & Features
+
+**Mood Dashboard**
+- Daily mood check-in with interactive slider (1-10 scale)
+- Emotion tags selection (Happy, Calm, Anxious, Sad, Stressed, Excited, Lonely, Grateful)
+- 7-day mood average and tracking statistics
+- Wellness tips section with rotating mental health advice
+- Optional notes field for journaling thoughts
+- Clean sidebar navigation with easy access to all features
+
+## 🔧 Recent Fixes & Improvements
+
+### Auth Glitch Fix (Latest Update)
+
+**Issue Resolved**: Fixed the authentication page glitch where users experienced rapid switching between the auth page and dashboard after login.
+
+**Root Cause**: 
+- Authentication state check was happening asynchronously through localStorage
+- Pages were making navigation decisions before the auth loading state completed
+- This created a race condition causing redirect loops
+
+**Solution Implemented**:
+1. ✅ Added proper loading state handling across all protected pages
+2. ✅ Implemented loading indicators during auth state verification
+3. ✅ Updated navigation logic to wait for auth state before redirecting
+4. ✅ Added branded loading screens with smooth animations
+
+**Files Updated**:
+- `AuthPage.jsx` - Added authLoading check and loading indicator
+- `MoodDashboard.jsx` - Added authLoading check before redirects
+- `ChatPage.jsx` - Added authLoading protection
+- `SettingsPage.jsx` - Added authLoading and useEffect for auth
+- `OnboardingPage.jsx` - Enhanced redirect logic with loading state
+
+**Result**: Smooth, glitch-free authentication flow with proper state management ✅
+
 ---
 
 ## ✨ Features
