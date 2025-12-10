@@ -56,7 +56,7 @@ const AuthPage = () => {
         description: 'You\'re safe here.',
       });
       setLoading(false);
-      navigate('/onboarding');
+      // Navigation handled by useEffect based on onboardingComplete status
     }, 1000);
   };
 
