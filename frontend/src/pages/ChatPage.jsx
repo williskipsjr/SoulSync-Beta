@@ -28,7 +28,7 @@ const SAVED_PROMPTS = [
 const ChatPage = () => {
   const navigate = useNavigate();
   const { conversationId } = useParams();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
   const {
     conversations,
     currentConversation,
@@ -45,10 +45,13 @@ const ChatPage = () => {
   const inputRef = useRef(null);
 
   useEffect(() => {
+    // Wait for auth loading to complete before redirecting
+    if (authLoading) return;
+    
     if (!isAuthenticated) {
       navigate('/auth');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, authLoading]);
 
   useEffect(() => {
     if (conversationId) {
