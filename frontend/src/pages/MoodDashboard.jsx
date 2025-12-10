@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Smile, Meh, Frown, Heart, TrendingUp, MessageCircle, Calendar, Sparkles } from 'lucide-react';
+import { Smile, Meh, Frown, Heart, TrendingUp, MessageCircle, Calendar, Sparkles, Leaf } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
