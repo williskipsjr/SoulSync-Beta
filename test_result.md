@@ -115,7 +115,14 @@ user_problem_statement: |
   - Design must be desktop-focused (resizable window, keyboard shortcuts, desktop UI patterns)
   - Reference image provided showing Claude/ChatGPT-style clean sidebar layout
   
-  CURRENT STATUS: Web app (React) built, needs Electron conversion + backend integration
+  🚨 CRITICAL UPDATES (USER CLARIFICATION - CURRENT SESSION):
+  1. NO MongoDB - All data stored in LOCAL JSON FILES (users.json, conversations.json, mood_history.json)
+  2. Telegram bot ALREADY EXISTS (SoulSync team bot) - Users only enter emergency contact's Chat ID
+  3. NO bot token needed from users
+  4. BERT model integration DEFERRED - will add later
+  5. Priority: 1) Test Electron app, 2) Implement SOS button, 3) BERT later
+  
+  CURRENT STATUS: Electron structure complete, ready for testing. Backend may not be needed (local storage only).
 
 backend:
   - task: "FastAPI server setup"
