@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 const SettingsPage = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
-  const { user, updateUser, logout } = useAuth();
+  const { user, updateUser, logout, isAuthenticated, loading: authLoading } = useAuth();
   
   const [contactName, setContactName] = useState(user?.emergencyContact?.name || '');
   const [contactRelationship, setContactRelationship] = useState(user?.emergencyContact?.relationship || '');
