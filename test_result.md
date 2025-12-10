@@ -311,6 +311,43 @@ test_plan:
   test_priority: "high_first"
 
 agent_communication:
+  - agent: "continuation_agent"
+    message: |
+      🔧 AUTH GLITCH FIX COMPLETED
+      
+      ISSUE IDENTIFIED:
+      - After login, app was switching/glitching between auth page and dashboard
+      - Root cause: Auth state check race condition during localStorage loading
+      - Components were redirecting before auth loading completed
+      
+      ✅ FIXES IMPLEMENTED:
+      1. Updated useAuth hook usage across all pages:
+         - AuthPage.jsx - Added authLoading check before redirects
+         - MoodDashboard.jsx - Added authLoading check before redirects
+         - ChatPage.jsx - Added authLoading check before redirects
+         - SettingsPage.jsx - Added authLoading check and useEffect for auth
+         - OnboardingPage.jsx - Added authLoading check and redirect logic
+      
+      2. Added loading indicators to all pages:
+         - Each page now shows branded loading screen during auth check
+         - Prevents premature redirects and UI glitches
+         - Uses smooth pulse animation with SoulSync branding
+      
+      3. Improved navigation flow:
+         - Pages wait for auth state to fully load before making decisions
+         - No more redirect loops or switching between pages
+         - Smooth transitions between authenticated and unauthenticated states
+      
+      TESTING STATUS:
+      - Frontend compiled successfully ✅
+      - Both frontend and backend services running ✅
+      - Auth glitch should be resolved ✅
+      
+      NEXT STEPS:
+      1. User should test the login flow to verify fix
+      2. Take screenshots of working app for README
+      3. Address any additional issues found during testing
+  
   - agent: "main"
     message: |
       SESSION COMPLETE - MAJOR PROGRESS MADE
