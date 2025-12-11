@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "cd frontend && yarn install && cd ../backend && pip install -r requirements.txt",
     "electron:dev": "concurrently \"yarn electron:start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron:start": "cd frontend && BROWSER=none yarn start",
+    "electron:start": "cd frontend && cross-env BROWSER=none yarn start",
     "electron:build": "cd frontend && yarn build && electron-builder",
     "electron:build:win": "cd frontend && yarn build && electron-builder --windows",
     "electron:build:mac": "cd frontend && yarn build && electron-builder --mac",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "cross-env": "^10.1.0",
     "electron": "^28.0.0",
     "electron-builder": "^24.9.1",
     "wait-on": "^7.2.0"

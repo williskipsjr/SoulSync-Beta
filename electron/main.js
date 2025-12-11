@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, Tray, Menu, globalShortcut, shell, Notifica
 const path = require('path');
 const Store = require('electron-store');
 const { spawn } = require('child_process');
+const fs = require('fs');
 
 // Initialize electron-store for persistent settings
 const store = new Store();
@@ -70,6 +71,10 @@ function createWindow() {
     isMaximized: false
   });
 
+  // Determine icon path only if file exists (safer on environments like OneDrive)
+  const iconPath = path.join(__dirname, 'icon.png');
+  const windowIcon = fs.existsSync(iconPath) ? iconPath : undefined;
+
   mainWindow = new BrowserWindow({
     width: windowState.width,
     height: windowState.height,
@@ -85,7 +90,7 @@ function createWindow() {
       enableRemoteModule: false,
       preload: path.join(__dirname, 'preload.js')
     },
-    icon: path.join(__dirname, 'icon.png'),
+    icon: windowIcon,
     titleBarStyle: 'default',
     frame: true
   });
@@ -149,6 +154,13 @@ function createWindow() {
 // Create system tray
 function createTray() {
   const iconPath = path.join(__dirname, 'icon.png');
+
+  if (!fs.existsSync(iconPath)) {
+    console.warn('Tray icon not found at', iconPath, '- skipping tray creation');
+    tray = null;
+    return;
+  }
+
   tray = new Tray(iconPath);
 
   const contextMenu = Menu.buildFromTemplate([
