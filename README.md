@@ -1,19 +1,20 @@
-# 🌿 SoulSync 2.0
-
 <div align="center">
+
+# 🌿 SoulSync 2.0
 
 ![SoulSync Logo](electron/icon.png)
 
-**Your Mental Health AI Companion**
+**Your AI-Powered Mental Health Companion**
 
-A compassionate desktop application that provides 24/7 mental health support through AI-powered conversations, mood tracking, and emergency assistance.
+*A compassionate desktop application providing 24/7 mental health support through AI conversations, mood tracking, and emergency assistance.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Electron](https://img.shields.io/badge/Electron-28.0.0-blue.svg)](https://www.electronjs.org/)
 [![React](https://img.shields.io/badge/React-19.0.0-blue.svg)](https://reactjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110.1-green.svg)](https://fastapi.tiangolo.com/)
+[![Python](https://img.shields.io/badge/Python-3.11+-yellow.svg)](https://www.python.org/)
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Documentation](#-documentation) • [Contributing](#-contributing)
+[✨ Features](#-features) • [📸 Screenshots](#-screenshots) • [🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [🛠️ Development](#-development)
 
 </div>
 
@@ -22,15 +23,18 @@ A compassionate desktop application that provides 24/7 mental health support thr
 ## 📖 Table of Contents
 
 - [Overview](#-overview)
+- [Why SoulSync?](#-why-soulsync)
 - [Features](#-features)
+- [Screenshots](#-screenshots)
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
+- [Quick Start](#-quick-start)
 - [Installation](#-installation)
-- [Running the Application](#-running-the-application)
+- [Running as Desktop App](#-running-as-desktop-app)
+- [Building for Distribution](#-building-for-distribution)
 - [Project Structure](#-project-structure)
 - [Configuration](#-configuration)
-- [Building for Production](#-building-for-production)
-- [Development](#-development)
+- [Development Guide](#-development-guide)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -39,181 +43,260 @@ A compassionate desktop application that provides 24/7 mental health support thr
 
 ## 🌟 Overview
 
-**SoulSync 2.0** is a desktop mental health companion designed to provide a safe, private, and supportive environment for users seeking emotional support. Built with Electron, React, and FastAPI, SoulSync offers real-time AI conversations, mood tracking, crisis detection, and emergency contact integration through Telegram.
+**SoulSync 2.0** is a privacy-first, desktop mental health companion designed to provide a safe, secure, and supportive environment for users seeking emotional support. Built with Electron, React, and FastAPI, SoulSync offers real-time AI conversations, comprehensive mood tracking, crisis detection, and emergency contact integration.
 
-### Why SoulSync?
+### 💡 Why SoulSync?
 
-- 🔒 **Private & Secure**: All data stored locally on your device
-- 🤖 **AI-Powered Support**: Empathetic conversations 24/7
-- 📊 **Mood Tracking**: Visualize and understand your emotional patterns
-- 🚨 **Crisis Detection**: Automatic emergency contact notification
-- 💚 **Calming Design**: Wellness-focused green theme designed for comfort
-
-## 📸 Application Screenshots
-
-### Authentication & Onboarding
-
-**Login Page**
-- Clean, calming green gradient design with wellness-focused aesthetics
-- Secure login with email and password
-- Tab-based interface for Login and Sign Up
-
-**Onboarding Flow (Step 1)**
-- Emergency contact setup with Telegram Chat ID integration
-- Contact name and relationship fields for personalized emergency alerts
-- Clear explanation of why emergency contacts are needed for user safety
-- Option to skip if needed (with warning message)
-
-**Onboarding Flow (Step 2)**
-- Welcome screen introducing SoulSync features
-- Overview of Emotional Support, Crisis Detection, and Mood Tracking
-- "Get Started" button to complete onboarding and access the dashboard
-
-### Dashboard & Features
-
-**Mood Dashboard**
-- Daily mood check-in with interactive slider (1-10 scale)
-- Emotion tags selection (Happy, Calm, Anxious, Sad, Stressed, Excited, Lonely, Grateful)
-- 7-day mood average and tracking statistics
-- Wellness tips section with rotating mental health advice
-- Optional notes field for journaling thoughts
-- Clean sidebar navigation with easy access to all features
-
-## 🔧 Recent Fixes & Improvements
-
-### Auth Glitch Fix (Latest Update)
-
-**Issue Resolved**: Fixed the authentication page glitch where users experienced rapid switching between the auth page and dashboard after login.
-
-**Root Cause**: 
-- Authentication state check was happening asynchronously through localStorage
-- Pages were making navigation decisions before the auth loading state completed
-- This created a race condition causing redirect loops
-
-**Solution Implemented**:
-1. ✅ Added proper loading state handling across all protected pages
-2. ✅ Implemented loading indicators during auth state verification
-3. ✅ Updated navigation logic to wait for auth state before redirecting
-4. ✅ Added branded loading screens with smooth animations
-
-**Files Updated**:
-- `AuthPage.jsx` - Added authLoading check and loading indicator
-- `MoodDashboard.jsx` - Added authLoading check before redirects
-- `ChatPage.jsx` - Added authLoading protection
-- `SettingsPage.jsx` - Added authLoading and useEffect for auth
-- `OnboardingPage.jsx` - Enhanced redirect logic with loading state
-
-**Result**: Smooth, glitch-free authentication flow with proper state management ✅
+- 🔒 **Privacy First**: All data stored locally on your device - no cloud storage
+- 🤖 **AI-Powered Support**: Empathetic AI conversations available 24/7
+- 📊 **Mood Tracking**: Visualize and understand your emotional patterns over time
+- 🚨 **Crisis Detection**: Automatic detection and emergency contact notification
+- 💚 **Calming Design**: Wellness-focused green theme designed for comfort and peace
+- 🖥️ **True Desktop App**: Runs completely offline after installation
+- 🆓 **Free & Open Source**: No subscriptions, no hidden costs
 
 ---
 
 ## ✨ Features
 
 ### 🔐 Authentication & Onboarding
-- Secure user registration and login
-- Emergency contact setup with Telegram integration
-- Personalized onboarding experience
+- ✅ Secure local user registration and login
+- ✅ Emergency contact setup with Telegram integration
+- ✅ Personalized onboarding experience
+- ✅ Privacy-focused - all data stays on your device
 
 ### 💬 AI Chat Interface
-- Real-time conversations with empathetic AI
-- Streaming responses for natural interaction
-- Chat history with conversation management
-- Crisis detection and support
+- ✅ Real-time conversations with empathetic AI
+- ✅ Context-aware responses trained on mental health therapy
+- ✅ Conversation history with easy management
+- ✅ Crisis detection and automatic support
+- ✅ Supportive responses for anxiety, depression, and stress
 
 ### 📈 Mood Dashboard
-- Daily mood tracking with interactive slider (1-10)
-- Emotional tags (Happy, Sad, Anxious, Calm, Energetic, Tired)
-- Visual mood history with charts
-- Personalized wellness tips
+- ✅ Daily mood tracking with interactive slider (1-10 scale)
+- ✅ Emotion tags: Happy, Sad, Anxious, Calm, Stressed, Excited, Lonely, Grateful
+- ✅ Visual mood history with statistics
+- ✅ 7-day mood average tracking
+- ✅ Personalized wellness tips and recommendations
+- ✅ Optional notes for journaling thoughts
 
 ### 🚨 SOS Emergency Button
-- Quick access panic button (Ctrl/Cmd+Shift+E)
-- Instant notification to emergency contacts via Telegram
-- Desktop notifications for immediate response
-- Confirmation modal to prevent accidental triggers
+- ✅ Quick access panic button (Ctrl/Cmd+Shift+E)
+- ✅ Instant notification to emergency contacts via Telegram
+- ✅ Desktop notifications for immediate response
+- ✅ Confirmation modal to prevent accidental triggers
+- ✅ Visible from all pages
 
 ### ⚙️ Settings & Customization
-- Theme toggle (Light/Dark mode)
-- Emergency contact management
-- Data export functionality
-- Account management
+- ✅ Profile management (name, email, username)
+- ✅ Emergency contact configuration
+- ✅ Telegram Chat ID validation
+- ✅ Data export functionality (coming soon)
+- ✅ Account management
 
 ### 🖥️ Desktop Features
-- System tray integration
-- Global keyboard shortcuts
-- Desktop notifications
-- Window state persistence
-- Minimize to tray
-- Cross-platform support (Windows, macOS, Linux)
+- ✅ **System tray integration** - minimize to tray
+- ✅ **Global keyboard shortcuts** - quick access anywhere
+- ✅ **Desktop notifications** - stay informed
+- ✅ **Window state persistence** - remembers size and position
+- ✅ **Cross-platform** - Windows, macOS, and Linux support
+- ✅ **Offline-first** - works without internet after installation
+
+---
+
+## 📸 Screenshots
+
+### Authentication & Onboarding
+
+<div align="center">
+
+#### Login Page
+*Clean, calming interface with wellness-focused aesthetics*
+
+![Login Page](screenshots/01-auth-login.png)
+
+#### Sign Up Page
+*Secure registration with optional emergency contact setup*
+
+![Signup Page](screenshots/02-auth-signup.png)
+
+#### Emergency Contact Setup
+*Configure Telegram emergency notifications for safety*
+
+![Onboarding Step 1](screenshots/03-onboarding-step1.png)
+
+#### Welcome Screen
+*Introduction to SoulSync features*
+
+![Onboarding Step 2](screenshots/04-onboarding-step2.png)
+
+</div>
+
+---
+
+### Main Application
+
+<div align="center">
+
+#### Mood Dashboard
+*Track your emotional wellness with daily mood check-ins*
+
+![Mood Dashboard](screenshots/05-mood-dashboard.png)
+
+**Features visible:**
+- Daily mood check-in with slider (1-10)
+- Emotion tag selection (Happy, Calm, Anxious, Sad, Stressed, Excited, Lonely, Grateful)
+- 7-day mood average tracking
+- Wellness tips section
+- Quick access to AI chat
+- Sidebar navigation
+
+---
+
+#### AI Chat Interface
+*Get support from empathetic AI trained on mental health therapy*
+
+![Chat Interface](screenshots/06-chat-page.png)
+
+**Features visible:**
+- Friendly greeting with user's name
+- Quick action buttons (Emotional Support, Coping Strategies, Reflection)
+- Conversation starters (Grounding Exercise, Mood Check, Journaling Starter)
+- Clean message input with voice and attachment support
+- Sidebar showing recent conversations
+
+---
+
+#### Settings Page
+*Manage your profile and emergency contacts*
+
+![Settings Page](screenshots/08-settings-page.png)
+
+**Features visible:**
+- Profile information management
+- Emergency contact configuration with Telegram
+- Clear explanation of safety features
+- Easy-to-use form interface
+
+</div>
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Electron** ^28.0.0 - Desktop application framework
-- **React** ^19.0.0 - UI library
-- **React Router** ^7.5.1 - Navigation
-- **Tailwind CSS** ^3.4.17 - Styling
-- **Framer Motion** ^12.23.25 - Animations
-- **Radix UI** - Accessible components
-- **Chart.js** ^4.5.1 - Data visualization
-- **Lucide React** ^0.507.0 - Icons
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **Electron** | ^28.0.0 | Desktop application framework |
+| **React** | ^19.0.0 | UI library with hooks |
+| **React Router** | ^7.5.1 | Client-side routing |
+| **Tailwind CSS** | ^3.4.17 | Utility-first styling |
+| **Framer Motion** | ^12.23.25 | Smooth animations |
+| **Radix UI** | Latest | Accessible component primitives |
+| **Chart.js** | ^4.5.1 | Mood visualization charts |
+| **Lucide React** | ^0.507.0 | Beautiful icon set |
+| **Axios** | ^1.8.4 | HTTP client for API calls |
 
 ### Backend
-- **FastAPI** 0.110.1 - Python web framework
-- **Uvicorn** 0.25.0 - ASGI server
-- **Pydantic** - Data validation
-- **Python-Jose** - JWT handling
-- **Bcrypt** - Password hashing
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **FastAPI** | 0.110.1 | Modern Python web framework |
+| **Uvicorn** | 0.25.0 | Lightning-fast ASGI server |
+| **Pydantic** | ^2.6.4 | Data validation with type hints |
+| **Aiofiles** | ^25.1.0 | Async file operations |
+| **Python** | 3.11+ | Programming language |
 
 ### Storage
-- **Local JSON Files** - User data, conversations, mood history
+- **Local JSON Files** - All user data, conversations, and mood history
 - **electron-store** ^8.1.0 - Persistent application settings
+- **No Database Required** - Works completely offline
 
 ### Development Tools
 - **CRACO** - Create React App Configuration Override
-- **ESLint** - Code linting
-- **electron-builder** ^24.9.1 - Application packaging
+- **electron-builder** ^24.9.1 - Package and distribute application
+- **Concurrently** ^8.2.2 - Run multiple processes
+- **Wait-on** ^7.2.0 - Wait for resources before starting
 
 ---
 
 ## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed on your system:
+Before installing SoulSync, ensure you have the following on your system:
 
-### Required
-- **Node.js** >= 16.x (Recommended: v20.x)
-- **npm** >= 8.x or **Yarn** >= 1.22.x
-- **Python** >= 3.11.x
-- **pip** (Python package manager)
+### Required Software
 
-### Optional
-- **Git** (for version control)
-- **MongoDB** (if using database features - currently optional)
+#### For Running the Development Version:
+```bash
+✅ Node.js >= 16.x (Recommended: v20.x)
+✅ npm >= 8.x or Yarn >= 1.22.x
+✅ Python >= 3.11.x
+✅ pip (Python package manager)
+```
 
-### Verify Installation
+#### For Using the Packaged Desktop App:
+```bash
+✅ No dependencies required!
+✅ Just download and install the app for your platform
+```
+
+### Verify Your Installation
 
 ```bash
 # Check Node.js version
 node --version
+# Expected: v16.x or higher
 
 # Check npm version
 npm --version
+# Expected: 8.x or higher
 
 # Check Yarn version (if using Yarn)
 yarn --version
+# Expected: 1.22.x or higher
 
 # Check Python version
 python3 --version
+# Expected: Python 3.11 or higher
 
 # Check pip version
 pip --version
+# Expected: pip 21.x or higher
 ```
 
 ---
 
-## 🚀 Installation
+## 🚀 Quick Start
+
+### Option 1: Download Pre-built Desktop App (Recommended for Users)
+
+**Coming Soon!** Pre-built installers will be available for:
+- 🪟 **Windows** - `.exe` installer
+- 🍎 **macOS** - `.dmg` disk image
+- 🐧 **Linux** - `.AppImage` or `.deb` package
+
+Simply download, install, and run. No technical setup required!
+
+### Option 2: Run from Source (For Developers)
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/yourusername/soulsync-desktop.git
+cd soulsync-desktop
+
+# 2. Install all dependencies (this will take a few minutes)
+yarn install
+
+# 3. Start the application in development mode
+yarn dev
+
+# The app will open automatically!
+```
+
+That's it! SoulSync will start with both the backend and frontend running.
+
+---
+
+## 📥 Installation
 
 ### Step 1: Clone the Repository
 
@@ -224,19 +307,19 @@ cd soulsync-desktop
 
 ### Step 2: Install Dependencies
 
-#### Option A: Using the Automated Script
+#### Automated Installation (Recommended)
 
 ```bash
-# This will install all dependencies (root, frontend, backend)
+# This installs everything: root, frontend, and backend dependencies
 yarn install
 ```
 
-The `postinstall` script will automatically:
-1. Install root Electron dependencies
-2. Install frontend React dependencies
-3. Install backend Python dependencies
+The `postinstall` script automatically:
+1. ✅ Installs root Electron dependencies
+2. ✅ Installs frontend React dependencies  
+3. ✅ Installs backend Python dependencies
 
-#### Option B: Manual Installation
+#### Manual Installation (If Needed)
 
 ```bash
 # Install root dependencies (Electron)
@@ -255,187 +338,148 @@ cd ..
 
 ### Step 3: Environment Configuration
 
-#### Backend Environment (.env)
+#### Backend Configuration
 
-Create a `.env` file in the `backend` directory:
+The backend uses local JSON file storage and doesn't require MongoDB or any external database.
 
-```bash
-cd backend
-cp .env.example .env  # If example exists, otherwise create manually
+**Optional: Configure Telegram Emergency Notifications**
+
+If you want to enable emergency contact notifications via Telegram:
+
+1. Create a Telegram Bot:
+   - Open Telegram and search for `@BotFather`
+   - Send `/newbot` and follow the instructions
+   - Copy your bot token
+
+2. Update `backend/.env`:
+```env
+# Optional: Telegram Bot for Emergency Alerts
+TELEGRAM_BOT_TOKEN=your_bot_token_here
 ```
 
-Add the following configurations:
+3. Get your Telegram Chat ID:
+   - Send a message to `@userinfobot` on Telegram
+   - It will reply with your Chat ID
+   - Users can configure this in the Settings page
+
+#### Frontend Configuration
+
+The frontend is already configured to communicate with the local backend:
 
 ```env
-# Backend Configuration
-PORT=8001
-HOST=0.0.0.0
-
-# MongoDB (Optional - currently using local JSON storage)
-MONGO_URL=mongodb://localhost:27017/soulsync
-
-# JWT Configuration (for future auth)
-SECRET_KEY=your-secret-key-here
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-
-# Telegram Bot (for emergency alerts)
-TELEGRAM_BOT_TOKEN=your-bot-token-here
-TELEGRAM_BOT_API_URL=https://api.telegram.org/bot
-
-# AI Model Configuration (future integration)
-AI_MODEL_ENDPOINT=your-ai-endpoint
-AI_MODEL_API_KEY=your-api-key
-```
-
-#### Frontend Environment (.env)
-
-The frontend may have a `.env` file for React environment variables:
-
-```env
+# frontend/.env (already configured)
 REACT_APP_BACKEND_URL=http://localhost:8001
-REACT_APP_API_PREFIX=/api
 ```
 
-### Step 4: Verify Installation
-
-```bash
-# Check if node_modules exists in root
-ls node_modules
-
-# Check if node_modules exists in frontend
-ls frontend/node_modules
-
-# Check if Python packages are installed
-cd backend
-pip list | grep fastapi
-cd ..
-```
+**No changes needed!** The app is ready to run.
 
 ---
 
-## 🏃 Running the Application
+## 🖥️ Running as Desktop App
 
-### Development Mode
+### Development Mode (Hot Reload)
 
-#### Option 1: Run Everything Together (Recommended)
+Run all services together with hot reload enabled:
 
 ```bash
-# Start backend + frontend + Electron all at once
+# Start everything: backend + frontend + Electron
 yarn dev
 ```
 
-This command will:
-1. Start the FastAPI backend on port 8001
-2. Start the React development server on port 3000
-3. Launch the Electron desktop application
+This command:
+- ✅ Starts the FastAPI backend on `localhost:8001`
+- ✅ Starts the React dev server on `localhost:3000`
+- ✅ Launches the Electron desktop window
+- ✅ Enables hot reload for both frontend and backend
 
-#### Option 2: Run Components Separately
+### Production Mode (Local)
 
-**Terminal 1 - Backend:**
-```bash
-cd backend
-uvicorn server:app --reload --host 0.0.0.0 --port 8001
-```
-
-**Terminal 2 - Frontend:**
-```bash
-cd frontend
-yarn start
-```
-
-**Terminal 3 - Electron:**
-```bash
-yarn start
-```
-
-### Production Mode
+To run the app with production builds:
 
 ```bash
-# Build the frontend first
+# 1. Build the frontend
 cd frontend
 yarn build
 cd ..
 
-# Start Electron with production build
+# 2. Start Electron with production build
 yarn start
 ```
 
 ### Keyboard Shortcuts
 
-When the application is running, you can use these shortcuts:
+When running the desktop app, use these shortcuts:
 
-- **Ctrl/Cmd + N** - New chat conversation
-- **Ctrl/Cmd + K** - Open search
-- **Ctrl/Cmd + ,** - Open settings
-- **Ctrl/Cmd + Shift + E** - Trigger SOS emergency button
-- **Ctrl/Cmd + Q** - Quit application
-
----
-
-## 📁 Project Structure
-
-```
-soulsync-desktop/
-├── electron/                   # Electron main process files
-│   ├── main.js                # Main process entry point (359 lines)
-│   ├── preload.js             # Preload script for IPC (61 lines)
-│   └── icon.png               # Application icon
-│
-├── frontend/                   # React frontend application
-│   ├── public/                # Static assets
-│   ├── src/
-│   │   ├── components/        # React components
-│   │   │   ├── ui/           # Reusable UI components (Radix)
-│   │   │   ├── AppShell.jsx  # Main application layout
-│   │   │   ├── Sidebar.jsx   # Navigation sidebar
-│   │   │   ├── SOSButton.jsx # Emergency panic button
-│   │   │   └── ...
-│   │   ├── pages/            # Page components
-│   │   │   ├── AuthPage.jsx      # Login/Signup
-│   │   │   ├── OnboardingPage.jsx # User onboarding
-│   │   │   ├── MoodDashboard.jsx  # Mood tracking
-│   │   │   ├── ChatPage.jsx      # AI chat interface
-│   │   │   └── SettingsPage.jsx  # User settings
-│   │   ├── hooks/            # Custom React hooks
-│   │   │   ├── useAuth.js        # Authentication hook
-│   │   │   ├── useElectron.js    # Electron integration hook
-│   │   │   ├── useConversations.js # Chat management
-│   │   │   └── useMood.js        # Mood tracking
-│   │   ├── lib/              # Utility functions
-│   │   ├── App.js            # Root component
-│   │   └── index.js          # Entry point
-│   ├── package.json
-│   ├── craco.config.js       # CRACO configuration
-│   └── tailwind.config.js    # Tailwind CSS configuration
-│
-├── backend/                    # FastAPI backend server
-│   ├── server.py              # Main FastAPI application
-│   ├── requirements.txt       # Python dependencies
-│   └── .env                   # Environment variables
-│
-├── tests/                      # Test files
-│   └── __init__.py
-│
-├── docs/                       # Documentation files
-│   ├── ELECTRON_TEST_REPORT.md
-│   ├── CRITICAL_UPDATES.md
-│   ├── PROJECT_REQUIREMENTS.md
-│   └── PROGRESS_TRACKING.md
-│
-├── package.json               # Root package.json (Electron config)
-├── yarn.lock                  # Dependency lock file
-├── .gitignore
-└── README.md                  # This file
-```
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl/Cmd + N` | New chat conversation |
+| `Ctrl/Cmd + K` | Open search |
+| `Ctrl/Cmd + ,` | Open settings |
+| `Ctrl/Cmd + Shift + E` | 🚨 Trigger SOS emergency button |
+| `Ctrl/Cmd + Q` | Quit application |
 
 ---
 
-## ⚙️ Configuration
+## 📦 Building for Distribution
 
-### Electron Configuration
+Create standalone installers for different platforms:
 
-The Electron configuration is in the root `package.json` under the `build` section:
+### Prerequisites for Building
+
+**Windows:**
+- Windows 7 or later
+
+**macOS:**
+- macOS 10.12 or later
+- Xcode Command Line Tools: `xcode-select --install`
+
+**Linux:**
+- Build tools: `sudo apt-get install build-essential`
+
+### Build Commands
+
+```bash
+# Build for your current platform
+yarn electron:build
+
+# Build for specific platforms
+yarn electron:build:win      # Windows .exe installer
+yarn electron:build:mac      # macOS .dmg image
+yarn electron:build:linux    # Linux .AppImage and .deb
+```
+
+### Build Output
+
+Built applications will be in the `dist/` directory:
+
+```
+dist/
+├── SoulSync Setup.exe        # Windows installer (NSIS)
+├── SoulSync.dmg              # macOS disk image
+├── SoulSync.AppImage         # Linux AppImage (universal)
+└── soulsync_amd64.deb        # Debian package
+```
+
+### Testing the Build
+
+```bash
+# Navigate to dist folder
+cd dist
+
+# On Windows
+./SoulSync Setup.exe
+
+# On macOS
+open SoulSync.dmg
+
+# On Linux
+chmod +x SoulSync.AppImage
+./SoulSync.AppImage
+```
+
+### Build Configuration
+
+The build configuration is in `package.json`:
 
 ```json
 {
@@ -446,18 +490,110 @@ The Electron configuration is in the root `package.json` under the `build` secti
       "output": "dist",
       "buildResources": "electron/resources"
     },
+    "files": [
+      "electron/**/*",
+      "frontend/build/**/*",
+      "backend/**/*"
+    ]
+  }
+}
+```
+
+---
+
+## 📁 Project Structure
+
+```
+soulsync-desktop/
+│
+├── electron/                      # Electron main process
+│   ├── main.js                   # Main process entry (window, tray, shortcuts)
+│   ├── preload.js                # Preload script for secure IPC
+│   └── icon.png                  # Application icon
+│
+├── frontend/                      # React frontend
+│   ├── public/                   # Static assets
+│   ├── src/
+│   │   ├── components/           # React components
+│   │   │   ├── ui/              # Reusable UI components (Radix)
+│   │   │   ├── AppShell.jsx     # Main application layout
+│   │   │   ├── Sidebar.jsx      # Navigation sidebar
+│   │   │   ├── SOSButton.jsx    # Emergency panic button
+│   │   │   └── ...
+│   │   ├── pages/               # Page components
+│   │   │   ├── AuthPage.jsx     # Login/Signup
+│   │   │   ├── OnboardingPage.jsx  # User onboarding
+│   │   │   ├── MoodDashboard.jsx   # Mood tracking
+│   │   │   ├── ChatPage.jsx     # AI chat interface
+│   │   │   └── SettingsPage.jsx # User settings
+│   │   ├── hooks/               # Custom React hooks
+│   │   │   ├── useAuth.js       # Authentication
+│   │   │   ├── useElectron.js   # Electron integration
+│   │   │   ├── useConversations.js  # Chat management
+│   │   │   └── useMood.js       # Mood tracking
+│   │   ├── lib/                 # Utility functions
+│   │   ├── App.js               # Root component
+│   │   └── index.js             # Entry point
+│   ├── package.json
+│   ├── craco.config.js          # CRACO configuration
+│   ├── tailwind.config.js       # Tailwind CSS config
+│   └── .env                     # Environment variables
+│
+├── backend/                       # FastAPI backend
+│   ├── server.py                 # Main FastAPI application
+│   ├── data/                     # Local JSON storage
+│   │   ├── users.json           # User data
+│   │   ├── conversations.json   # Chat history
+│   │   ├── mood_entries.json    # Mood tracking data
+│   │   └── status_checks.json   # System status
+│   ├── requirements.txt          # Python dependencies
+│   └── .env                      # Backend configuration
+│
+├── screenshots/                   # Application screenshots
+│   ├── 01-auth-login.png
+│   ├── 02-auth-signup.png
+│   └── ...
+│
+├── package.json                   # Root package.json (Electron)
+├── yarn.lock                      # Dependency lock file
+└── README.md                      # This file
+```
+
+### Key Files Explained
+
+| File | Purpose |
+|------|---------|
+| `electron/main.js` | Electron main process - manages window, tray, keyboard shortcuts |
+| `electron/preload.js` | Secure bridge between Electron and React |
+| `frontend/src/App.js` | React root component with routing |
+| `backend/server.py` | FastAPI backend with all API endpoints |
+| `package.json` (root) | Electron and build configuration |
+| `frontend/package.json` | React dependencies and scripts |
+| `backend/requirements.txt` | Python dependencies |
+
+---
+
+## ⚙️ Configuration
+
+### Electron Configuration
+
+Desktop app settings are configured in the root `package.json`:
+
+```json
+{
+  "build": {
+    "appId": "com.soulsync.desktop",
+    "productName": "SoulSync",
     "win": {
       "target": ["nsis"],
       "icon": "electron/icon.png"
     },
     "mac": {
       "target": ["dmg"],
-      "icon": "electron/icon.png",
       "category": "public.app-category.healthcare-fitness"
     },
     "linux": {
       "target": ["AppImage", "deb"],
-      "icon": "electron/icon.png",
       "category": "Education"
     }
   }
@@ -468,137 +604,186 @@ The Electron configuration is in the root `package.json` under the `build` secti
 
 SoulSync follows Electron security best practices:
 
-- ✅ **Context Isolation**: Enabled
-- ✅ **Node Integration**: Disabled in renderer
-- ✅ **Preload Script**: Used for secure IPC communication
-- ✅ **Remote Module**: Disabled
-- ✅ **External Links**: Opened in default browser, not in-app
+- ✅ **Context Isolation** - Enabled
+- ✅ **Node Integration** - Disabled in renderer
+- ✅ **Preload Script** - Used for secure IPC
+- ✅ **Remote Module** - Disabled
+- ✅ **External Links** - Opened in default browser
 
 ### Window Configuration
 
-- Default size: 1280x800
-- Minimum size: 1024x600
-- Window state persistence (size, position, maximized state)
-- Minimize to system tray option
+- **Default size**: 1280x800
+- **Minimum size**: 1024x600
+- **Window state persistence**: Remembers size, position, maximized state
+- **Minimize to tray**: Optional, configurable
+
+### Backend API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/` | GET | Health check |
+| `/api/health` | GET | Detailed health status |
+| `/api/users/register` | POST | Register new user |
+| `/api/users/login` | POST | User login |
+| `/api/users/{id}` | GET | Get user profile |
+| `/api/users/{id}` | PATCH | Update user |
+| `/api/chat` | POST | Send chat message |
+| `/api/conversations/{user_id}` | GET | Get all conversations |
+| `/api/mood` | POST | Create mood entry |
+| `/api/mood/{user_id}` | GET | Get mood history |
+| `/api/mood/{user_id}/stats` | GET | Get mood statistics |
+| `/api/emergency/notify` | POST | Send emergency alert |
 
 ---
 
-## 📦 Building for Production
+## 💻 Development Guide
 
-### Prerequisites for Building
-
-Depending on your target platform, you may need:
-
-**Windows:**
-- Windows 7 or later
-
-**macOS:**
-- macOS 10.12 or later
-- Xcode Command Line Tools
-
-**Linux:**
-- Build tools: `sudo apt-get install build-essential`
-
-### Build Commands
-
-#### Build for Current Platform
+### Project Setup
 
 ```bash
-yarn electron:build
+# Clone and install
+git clone https://github.com/yourusername/soulsync-desktop.git
+cd soulsync-desktop
+yarn install
 ```
 
-#### Build for Specific Platform
+### Development Workflow
+
+#### 1. Start Development Servers
 
 ```bash
-# Build for Windows
-yarn electron:build:win
+# Terminal 1: Start everything
+yarn dev
 
-# Build for macOS
-yarn electron:build:mac
+# Or run separately:
 
-# Build for Linux
-yarn electron:build:linux
+# Terminal 1: Backend only
+cd backend
+uvicorn server:app --reload --host 0.0.0.0 --port 8001
+
+# Terminal 2: Frontend only
+cd frontend
+yarn start
+
+# Terminal 3: Electron only
+yarn start
 ```
 
-### Output
+#### 2. Making Changes
 
-Built applications will be in the `dist/` directory:
+**Frontend Changes:**
+- Edit files in `frontend/src/`
+- Hot reload is automatic
+- Changes appear instantly
 
-- **Windows**: `SoulSync Setup.exe` (NSIS installer)
-- **macOS**: `SoulSync.dmg` (DMG image)
-- **Linux**: `SoulSync.AppImage` or `soulsync_amd64.deb`
+**Backend Changes:**
+- Edit `backend/server.py`
+- Uvicorn auto-reloads with `--reload` flag
+- Changes applied automatically
 
-### Testing the Build
-
-After building, test the installer:
-
-1. Navigate to the `dist/` folder
-2. Install the application
-3. Run SoulSync
-4. Verify all features work correctly
-
----
-
-## 💻 Development
+**Electron Changes:**
+- Edit `electron/main.js` or `electron/preload.js`
+- Restart Electron: Close window and run `yarn start`
 
 ### Adding New Features
 
-1. **Frontend Components**: Add to `frontend/src/components/`
-2. **Pages**: Add to `frontend/src/pages/`
-3. **API Endpoints**: Add to `backend/server.py`
-4. **Electron IPC**: Add handlers in `electron/main.js` and `electron/preload.js`
+#### Frontend Component
+```bash
+# Create new component
+touch frontend/src/components/NewFeature.jsx
+```
+
+```jsx
+// frontend/src/components/NewFeature.jsx
+import React from 'react';
+
+export const NewFeature = () => {
+  return (
+    <div className="p-4 bg-primary/10 rounded-lg">
+      <h2 className="text-2xl font-bold text-primary">New Feature</h2>
+      <p className="text-muted-foreground">Feature description</p>
+    </div>
+  );
+};
+```
+
+#### Backend API Endpoint
+```python
+# backend/server.py
+
+@api_router.post("/new-feature")
+async def new_feature(data: dict):
+    """New feature endpoint."""
+    # Process data
+    result = {"success": True, "data": data}
+    return result
+```
+
+#### Electron IPC Handler
+```javascript
+// electron/main.js
+
+ipcMain.handle('new-feature', async (event, data) => {
+  console.log('New feature called:', data);
+  return { success: true };
+});
+```
+
+```javascript
+// electron/preload.js
+
+contextBridge.exposeInMainWorld('electron', {
+  newFeature: (data) => ipcRenderer.invoke('new-feature', data)
+});
+```
 
 ### Code Style
 
-- **JavaScript/React**: Follow ESLint configuration
-- **Python**: Follow PEP 8 style guide
-- **CSS**: Use Tailwind CSS utility classes
+#### JavaScript/React
+- Follow ESLint configuration
+- Use functional components with hooks
+- Use Tailwind CSS utility classes
+- Follow component naming conventions
 
-### Linting
-
-```bash
-# Lint frontend code
-cd frontend
-npx eslint src/
-
-# Format Python code
-cd backend
-black server.py
-isort server.py
-flake8 server.py
-```
+#### Python
+- Follow PEP 8 style guide
+- Use type hints with Pydantic models
+- Async/await for all I/O operations
+- Clear docstrings for all functions
 
 ### Testing
 
 ```bash
-# Run backend tests
+# Frontend tests (if configured)
+cd frontend
+yarn test
+
+# Backend tests
 cd backend
 pytest
 
-# Run frontend tests (if configured)
-cd frontend
-yarn test
+# E2E tests (coming soon)
+yarn test:e2e
 ```
 
 ### Hot Reload
 
-Both frontend and backend support hot reload:
-
-- **Frontend**: React hot reload is automatic in development
-- **Backend**: Uvicorn auto-reloads on code changes with `--reload` flag
-- **Electron**: Restart required for main process changes; renderer process uses React hot reload
+- **Frontend**: React hot reload works automatically
+- **Backend**: Uvicorn auto-reloads with `--reload` flag
+- **Electron Main Process**: Manual restart required
+- **Electron Renderer**: Uses React hot reload
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Common Issues and Solutions
 
-#### Issue 1: Dependencies Not Installing
+#### Issue 1: Dependencies Won't Install
 
 **Problem**: `yarn install` fails or takes too long
 
-**Solution**:
+**Solutions**:
 ```bash
 # Clear yarn cache
 yarn cache clean
@@ -606,29 +791,37 @@ yarn cache clean
 # Remove node_modules and reinstall
 rm -rf node_modules frontend/node_modules
 yarn install
+
+# Use npm instead if Yarn fails
+npm install
+cd frontend && npm install
 ```
 
 #### Issue 2: Electron Won't Start
 
-**Problem**: `yarn start` shows electron errors
+**Problem**: `yarn start` shows Electron errors
 
-**Solution**:
+**Solutions**:
 ```bash
-# Check if electron is installed
+# Check if Electron is installed
 ls node_modules/.bin/electron
 
-# Reinstall electron
+# Reinstall Electron
 yarn add electron@^28.0.0 --dev
 
+# Clear Electron cache
+rm -rf node_modules/electron
+yarn install
+
 # Try rebuilding native modules
-cd node_modules/electron && npm run install && cd ../..
+cd node_modules/electron && npm run install
 ```
 
-#### Issue 3: Backend Not Starting
+#### Issue 3: Backend Won't Start
 
 **Problem**: Backend server fails to start
 
-**Solution**:
+**Solutions**:
 ```bash
 # Check Python dependencies
 cd backend
@@ -638,18 +831,19 @@ pip list | grep fastapi
 pip install -r requirements.txt --force-reinstall
 
 # Check if port 8001 is available
-lsof -i :8001  # macOS/Linux
+lsof -i :8001          # macOS/Linux
 netstat -ano | findstr :8001  # Windows
 
 # Start manually to see errors
-uvicorn server:app --reload --port 8001
+cd backend
+python -m uvicorn server:app --reload --port 8001
 ```
 
 #### Issue 4: Frontend Build Fails
 
 **Problem**: `yarn build` fails with errors
 
-**Solution**:
+**Solutions**:
 ```bash
 cd frontend
 
@@ -667,124 +861,235 @@ yarn install
 yarn build
 ```
 
-#### Issue 5: Window Won't Open (Headless Environment)
+#### Issue 5: "Cannot find module 'aiofiles'"
 
-**Problem**: Running in a server without display
-
-**Solution**:
-This is expected. Electron requires a display server (X11). To test:
-- Run on a desktop machine with GUI
-- Use virtual display (Xvfb) on Linux servers
-- Build and test installers on target machines
-
-#### Issue 6: MongoDB Connection Errors
-
-**Problem**: Backend shows MongoDB connection errors
+**Problem**: Backend fails with import error
 
 **Solution**:
-SoulSync currently uses **local JSON storage**, not MongoDB. If you see these errors:
 ```bash
-# Comment out MongoDB code in backend/server.py
-# Or start MongoDB:
-docker run -d -p 27017:27017 mongo
+cd backend
+pip install aiofiles
+pip freeze > requirements.txt
+```
+
+#### Issue 6: Data Not Persisting
+
+**Problem**: User data disappears after restart
+
+**Check**:
+```bash
+# Verify data directory exists
+ls -la backend/data/
+
+# Check file permissions
+chmod 755 backend/data/
+chmod 644 backend/data/*.json
+
+# View data files
+cat backend/data/users.json
+```
+
+#### Issue 7: Telegram Bot Not Working
+
+**Problem**: Emergency notifications not sent
+
+**Solutions**:
+1. Verify bot token in `backend/.env`:
+   ```env
+   TELEGRAM_BOT_TOKEN=123456:ABC-DEF...
+   ```
+2. Test bot token:
+   ```bash
+   curl "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getMe"
+   ```
+3. Verify Chat ID is correct (send message to `@userinfobot`)
+
+#### Issue 8: Port Already in Use
+
+**Problem**: Backend or frontend port is already in use
+
+**Solutions**:
+```bash
+# Kill process on port 8001 (backend)
+lsof -ti:8001 | xargs kill -9    # macOS/Linux
+netstat -ano | findstr :8001     # Windows - note PID, then:
+taskkill /PID <PID> /F           # Windows
+
+# Kill process on port 3000 (frontend)
+lsof -ti:3000 | xargs kill -9    # macOS/Linux
+```
+
+### Debug Mode
+
+Enable debug logging:
+
+```bash
+# Backend debug mode
+cd backend
+DEBUG=1 uvicorn server:app --reload --log-level debug
+
+# Frontend debug mode
+cd frontend
+REACT_APP_DEBUG=true yarn start
+
+# Electron debug mode with DevTools
+# DevTools automatically open in development mode
 ```
 
 ### Getting Help
 
 If you encounter issues not listed here:
 
-1. Check the [ELECTRON_TEST_REPORT.md](ELECTRON_TEST_REPORT.md) for testing details
-2. Review [CRITICAL_UPDATES.md](CRITICAL_UPDATES.md) for architecture changes
-3. Open an issue on GitHub with:
-   - Error messages
+1. **Check the logs**:
+   ```bash
+   # Backend logs
+   tail -f backend/logs/app.log
+   
+   # Frontend console
+   # Open DevTools in Electron: View → Toggle Developer Tools
+   ```
+
+2. **Search existing issues** on GitHub
+
+3. **Open a new issue** with:
+   - Error messages (full stack trace)
    - Steps to reproduce
-   - System information (OS, Node version, Python version)
+   - System information:
+     ```bash
+     node --version
+     python --version
+     yarn --version
+     uname -a  # macOS/Linux
+     systeminfo # Windows
+     ```
+
+4. **Join our community**:
+   - Discord: [discord.gg/soulsync](https://discord.gg/soulsync)
+   - Reddit: [r/soulsync](https://reddit.com/r/soulsync)
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions to SoulSync! Here's how you can help:
+We welcome contributions from the community! Here's how you can help:
 
 ### Types of Contributions
 
-- 🐛 Bug reports and fixes
-- ✨ New features and enhancements
-- 📝 Documentation improvements
-- 🎨 UI/UX improvements
-- 🧪 Tests and quality assurance
+- 🐛 **Bug Reports** - Report issues you encounter
+- ✨ **Feature Requests** - Suggest new features
+- 📝 **Documentation** - Improve or translate docs
+- 💻 **Code** - Submit bug fixes or new features
+- 🎨 **Design** - Improve UI/UX
+- 🧪 **Testing** - Write tests or test releases
 
 ### Development Workflow
 
 1. **Fork the Repository**
    ```bash
-   git clone https://github.com/yourusername/soulsync-desktop.git
+   # Click "Fork" on GitHub, then:
+   git clone https://github.com/YOUR_USERNAME/soulsync-desktop.git
    cd soulsync-desktop
    ```
 
 2. **Create a Feature Branch**
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b feature/amazing-feature
+   # or
+   git checkout -b fix/bug-description
    ```
 
 3. **Make Your Changes**
    - Write clean, documented code
    - Follow existing code style
-   - Add tests if applicable
+   - Add comments for complex logic
+   - Test your changes thoroughly
 
-4. **Test Your Changes**
-   ```bash
-   # Test frontend
-   cd frontend && yarn test
-   
-   # Test backend
-   cd backend && pytest
-   
-   # Test full application
-   yarn dev
-   ```
-
-5. **Commit Your Changes**
+4. **Commit Your Changes**
    ```bash
    git add .
    git commit -m "feat: add amazing feature"
    ```
 
-   Use conventional commit messages:
+   **Commit Message Format:**
+   ```
+   <type>: <description>
+
+   [optional body]
+   [optional footer]
+   ```
+
+   **Types:**
    - `feat:` - New feature
    - `fix:` - Bug fix
    - `docs:` - Documentation changes
-   - `style:` - Code style changes (formatting)
+   - `style:` - Code style (formatting, no logic change)
    - `refactor:` - Code refactoring
-   - `test:` - Adding tests
+   - `test:` - Adding or updating tests
    - `chore:` - Maintenance tasks
 
-6. **Push and Create Pull Request**
+5. **Push to Your Fork**
    ```bash
-   git push origin feature/your-feature-name
+   git push origin feature/amazing-feature
    ```
 
-   Then create a Pull Request on GitHub.
+6. **Create a Pull Request**
+   - Go to the original repository
+   - Click "New Pull Request"
+   - Select your branch
+   - Fill in the PR template
+   - Submit for review
 
 ### Code Review Process
 
-1. Maintainers will review your PR
-2. Address any feedback or requested changes
-3. Once approved, your PR will be merged
-4. Your contribution will be credited in the release notes
+1. **Automated Checks** - CI/CD runs tests and linting
+2. **Maintainer Review** - Core team reviews code
+3. **Feedback** - Address any requested changes
+4. **Approval** - Once approved, PR is merged
+5. **Release** - Your contribution is included in the next release
+
+### Development Guidelines
+
+#### General Rules
+- ✅ Keep changes focused and atomic
+- ✅ Write clear commit messages
+- ✅ Add tests for new features
+- ✅ Update documentation
+- ✅ Follow the existing code style
+
+#### Frontend Guidelines
+- Use functional components with hooks
+- Keep components small and focused
+- Use Tailwind CSS for styling
+- Add `data-testid` for testing
+- Ensure accessibility (ARIA labels)
+
+#### Backend Guidelines
+- Use async/await for I/O operations
+- Add type hints with Pydantic
+- Write clear docstrings
+- Handle errors gracefully
+- Log important events
 
 ### Community Guidelines
 
-- Be respectful and inclusive
-- Help others learn and grow
-- Focus on constructive feedback
-- Maintain a positive environment
+- **Be respectful and inclusive** - treat everyone with kindness
+- **Help others learn** - we're all here to grow
+- **Give constructive feedback** - focus on improvement
+- **Maintain a positive environment** - mental health matters
+
+### Recognition
+
+Contributors will be:
+- ✨ Listed in the CONTRIBUTORS.md file
+- 🎉 Mentioned in release notes
+- 💚 Thanked in the project README
+- 🏆 Eligible for special Discord roles
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**.
 
 ```
 MIT License
@@ -810,35 +1115,71 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+### What This Means
+
+✅ **Free to use** - personal or commercial  
+✅ **Free to modify** - adapt to your needs  
+✅ **Free to distribute** - share with others  
+✅ **Free to sublicense** - include in your projects  
+
+❗ **No warranty** - use at your own risk  
+❗ **Attribution required** - keep the copyright notice  
+
 ---
 
 ## 🙏 Acknowledgments
 
-- **Electron** - For making desktop applications with web technologies possible
-- **React** - For the powerful and flexible UI framework
-- **FastAPI** - For the modern, fast Python web framework
-- **Radix UI** - For accessible, unstyled components
-- **Tailwind CSS** - For the utility-first CSS framework
-- **Lucide** - For beautiful icons
-- **All Contributors** - Thank you for making SoulSync better!
+### Technologies
+
+- **[Electron](https://www.electronjs.org/)** - Making desktop apps with web technologies possible
+- **[React](https://reactjs.org/)** - Powerful and flexible UI framework
+- **[FastAPI](https://fastapi.tiangolo.com/)** - Modern, fast Python web framework
+- **[Radix UI](https://www.radix-ui.com/)** - Accessible, unstyled component primitives
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Lucide Icons](https://lucide.dev/)** - Beautiful icon set
+- **[Framer Motion](https://www.framer.com/motion/)** - Production-ready animations
+
+### Inspiration
+
+- Mental health professionals worldwide
+- Open source mental health initiatives
+- The supportive developer community
+
+### Special Thanks
+
+- All contributors who help improve SoulSync
+- Mental health advocates and users
+- The open source community
 
 ---
 
 ## 📞 Contact & Support
 
-### Get in Touch
+### Get Help
 
-- **GitHub Issues**: [Report a bug or request a feature](https://github.com/yourusername/soulsync-desktop/issues)
-- **Email**: support@soulsync.app
-- **Twitter**: [@SoulSyncApp](https://twitter.com/soulsyncapp)
-- **Discord**: [Join our community](https://discord.gg/soulsync)
+- 📖 **Documentation**: This README and [docs/](docs/) folder
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/soulsync-desktop/issues)
+- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/soulsync-desktop/discussions)
+- 💬 **Community Chat**: [Discord Server](https://discord.gg/soulsync)
 
-### Resources
+### Mental Health Resources
 
-- **Documentation**: [docs/](docs/)
-- **FAQ**: [FAQ.md](docs/FAQ.md)
-- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
-- **Roadmap**: [ROADMAP.md](ROADMAP.md)
+**If you're in crisis, please reach out:**
+
+- 🇺🇸 **USA**: 988 (Suicide & Crisis Lifeline)
+- 🇬🇧 **UK**: 116 123 (Samaritans)
+- 🇨🇦 **Canada**: 1-833-456-4566 (Talk Suicide Canada)
+- 🇦🇺 **Australia**: 13 11 14 (Lifeline)
+- 🌍 **International**: [findahelpline.com](https://findahelpline.com)
+
+**SoulSync is a support tool, not a replacement for professional help.**
+
+### Connect With Us
+
+- 🐦 **Twitter**: [@SoulSyncApp](https://twitter.com/soulsyncapp)
+- 📧 **Email**: support@soulsync.app
+- 💬 **Discord**: [Join our community](https://discord.gg/soulsync)
+- 🌐 **Website**: [soulsync.app](https://soulsync.app)
 
 ---
 
@@ -846,16 +1187,55 @@ SOFTWARE.
 
 If you find SoulSync helpful, please consider giving it a star ⭐
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/soulsync-desktop&type=Date)](https://star-history.com/#yourusername/soulsync-desktop&Date)
+Your support helps us reach more people who need mental health support.
+
+---
+
+## 🗺️ Roadmap
+
+### Coming Soon (v2.1)
+
+- [ ] AI model integration (GPT-4, Claude, etc.)
+- [ ] Voice input for chat
+- [ ] Mood visualization charts with trends
+- [ ] Daily wellness reminders
+- [ ] Journaling feature
+- [ ] Export conversation history
+- [ ] Multiple language support
+- [ ] Dark mode improvements
+
+### Future Plans (v3.0)
+
+- [ ] Mobile app companion (iOS/Android)
+- [ ] End-to-end encryption for cloud sync
+- [ ] Group therapy sessions
+- [ ] Integration with wearables (Apple Watch, Fitbit)
+- [ ] Meditation timer and guides
+- [ ] Sleep tracking integration
+- [ ] Professional therapist matching
+- [ ] Insurance integration
+
+### Your Ideas
+
+Have a feature idea? [Share it on GitHub Discussions!](https://github.com/yourusername/soulsync-desktop/discussions)
 
 ---
 
 <div align="center">
 
-**Made with 💚 by the SoulSync Team**
+## 💚 Made with Love by the SoulSync Team
 
 *Your mental health matters. You're not alone.*
 
+**Thank you for using SoulSync!**
+
 [⬆ Back to Top](#-soulsync-20)
 
-</div
+---
+
+**Star ⭐ this repository if SoulSync helped you!**
+
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/soulsync-desktop?style=social)](https://github.com/yourusername/soulsync-desktop/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/yourusername/soulsync-desktop?style=social)](https://github.com/yourusername/soulsync-desktop/network/members)
+
+</div>
